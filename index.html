@@ -7,9 +7,15 @@
     <title>SHIFUMI</title>
 </head>
 <body>
-    <button class="buttonChoice">Pierre</button>
-    <button class="buttonChoice">Feuille</button>
-    <button class="buttonChoice">Ciseaux</button>
+    <button class="buttonChoice" onclick="choiceMade('rock')">rock</button>
+    <button class="buttonChoice" onclick="choiceMade('paper')">paper</button>
+    <button class="buttonChoice" onclick="choiceMade('scissors')">scissors</button>
+
+    <div id="results">
+        <p>Player : </p>
+        <p>Bot : </p>
+        <p>Result : </p>
+    </div>
 
 
     <script src="script/main.js"></script>
