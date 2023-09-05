@@ -1,3 +1,19 @@
+var botScore = 0,
+    playerScore = 0;
+retrieveScore();
+
+// Function to retrieve the score from local storage when starting the game
+function retrieveScore() {
+    if (localStorage.getItem("playerScore") != null) {
+        playerScore = localStorage.getItem("playerScore");
+    }
+    if (localStorage.getItem("botScore") != null) {
+        botScore = localStorage.getItem("botScore");
+    }
+    document.getElementById("global_score").innerHTML =
+        "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
+}
+
 // When the player clicks
 function choiceMade(choice) {
     // Retrieve the bot choice and display it in the console
@@ -6,29 +22,29 @@ function choiceMade(choice) {
     switch (choice) {
         case "rock":
             if (botChoice == "rock") {
-                alertWinner("tie");
+                gameEnded(choice, botChoice, "tie");
             } else if (botChoice == "paper") {
-                alertWinner("bot");
+                gameEnded(choice, botChoice, "bot");
             } else {
-                alertWinner("player");
+                gameEnded(choice, botChoice, "player");
             }
             break;
         case "paper":
             if (botChoice == "rock") {
-                alertWinner("player");
+                gameEnded(choice, botChoice, "player");
             } else if (botChoice == "paper") {
-                alertWinner("tie");
+                gameEnded(choice, botChoice, "tie");
             } else {
-                alertWinner("bot");
+                gameEnded(choice, botChoice, "bot");
             }
             break;
         case "scissors":
             if (botChoice == "rock") {
-                alertWinner("bot");
+                gameEnded(choice, botChoice, "bot");
             } else if (botChoice == "paper") {
-                alertWinner("player");
+                gameEnded(choice, botChoice, "player");
             } else {
-                alertWinner("tie");
+                gameEnded(choice, botChoice, "tie");
             }
             break;
     }
@@ -41,8 +57,9 @@ function botPlay() {
     return choices[randomChoice];
 }
 
-function alertWinner(result) {
-    alert(gameResultMessage(result));
+function gameEnded(playerChoice, botChoice, result) {
+    displayResult(playerChoice, botChoice, result);
+    updateGlobalScore(result);
 }
 
 function gameResultMessage(result) {
@@ -65,4 +82,32 @@ function displayResult(playerChoice, botChoice, result) {
         "</p> <p>Result : " +
         gameResultMessage(result) +
         "</p>";
+}
+
+// Update the global score
+function updateGlobalScore(result) {
+    if (result == "player") {
+        playerScore++;
+    } else if (result == "bot") {
+        botScore++;
+    }
+    storeScore();
+    document.getElementById("global_score").innerHTML =
+        "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
+}
+
+// Store the score in the local storage
+function storeScore() {
+    localStorage.setItem("playerScore", playerScore);
+    localStorage.setItem("botScore", botScore);
+}
+
+// Function to delete the score from local storage
+function deleteStoredScore() {
+    localStorage.removeItem("playerScore");
+    localStorage.removeItem("botScore");
+    playerScore = 0;
+    botScore = 0;
+    document.getElementById("global_score").innerHTML =
+        "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
 }
