@@ -2,7 +2,8 @@
 
 /* General styles */
 :root {
-    --background: #191716;
+    --background: #181616;
+    --lighter-background: #202020;
     --background-emphaze: #e6af2e;
     --text-emphaze: #ff3a2c;
     --text: #e0e2db;
@@ -71,12 +72,14 @@ hr {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 2rem;
+    margin: 0rem auto 2rem auto;
+    max-width: 430px;
+    width: 100%;
 }
 
 .choices button {
-    background-color: var(--text-emphaze);
-    color: var(--text);
+    background-color: var(--background-emphaze);
+    color: var(--background);
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
@@ -87,7 +90,7 @@ hr {
 }
 
 .choices button:hover {
-    background-color: var(--background-emphaze);
+    background-color: var(--text-emphaze);
     color: var(--background);
 }
 
@@ -120,8 +123,8 @@ div.stats * {
 }
 
 div.global_score_display button {
-    background-color: var(--background-emphaze);
-    color: var(--background);
+    background-color: var(--text-emphaze);
+    color: var(--text);
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
@@ -132,14 +135,21 @@ div.global_score_display button {
 }
 
 div.global_score_display button:hover {
-    background-color: var(--text-emphaze);
-    color: var(--text);
+    background-color: var(--background-emphaze);
+    color: var(--background);
+}
+
+div.global_score_display button:active {
+    transition: all 0.05s ease-in-out;
+    transform: translateY(0.2rem);
 }
 
 /* History style */
 
 div.history {
     margin: 1rem;
+    max-width: 250px;
+    width: 100%;
 }
 
 div.history h2 {
@@ -153,4 +163,43 @@ table#history {
 
 table#history tr {
     padding: 0.5rem;
+}
+
+/* Table style */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+td, th {
+    padding: 0.15rem 0;
+    border-radius: 0.3rem;
+}
+
+th:nth-child(1) {
+    text-align: right;
+}
+
+th:nth-child(2) {
+    padding: 0 0.5rem;
+}
+
+th:nth-child(3) {
+    text-align: left;
+}
+
+td:nth-child(1) {
+    text-align: right;
+}
+
+td:nth-child(3) {
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    /* Calculate a greyer color than the background */
+
+    background-color: var(--lighter-background);
 }
