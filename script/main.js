@@ -35,7 +35,7 @@ function retrieveHistory() {
             } else {
                 newHistory.style.backgroundColor = "grey";
             }
-            historyList.appendChild(newHistory);
+            historyList.insertBefore(newHistory, historyList.firstChild);
         }
     }
 }
@@ -165,5 +165,5 @@ function addToHistory(playerChoice, botChoice, result) {
     } else {
         newHistory.style.backgroundColor = "grey";
     }
-    history.appendChild(newHistory);
+    history.insertBefore(newHistory, history.firstChild);
 }
