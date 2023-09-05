@@ -60,6 +60,7 @@ function botPlay() {
 function gameEnded(playerChoice, botChoice, result) {
     displayResult(playerChoice, botChoice, result);
     updateGlobalScore(result);
+    addToHistory(playerChoice, botChoice, result);
 }
 
 function gameResultMessage(result) {
@@ -110,4 +111,20 @@ function deleteStoredScore() {
     botScore = 0;
     document.getElementById("global_score").innerHTML =
         "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
+    document.getElementById("history").innerHTML = "";
+}
+
+// Function to add the result of the game to the history
+function addToHistory(playerChoice, botChoice, result) {
+    var history = document.getElementById("history");
+    var newHistory = document.createElement("li");
+    newHistory.textContent = "Player : " + playerChoice + " Bot : " + botChoice;
+    if (result == "player") {
+        newHistory.style.backgroundColor = "green";
+    } else if (result == "bot") {
+        newHistory.style.backgroundColor = "red";
+    } else {
+        newHistory.style.backgroundColor = "grey";
+    }
+    history.appendChild(newHistory);
 }
