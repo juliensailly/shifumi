@@ -157,7 +157,8 @@ function deleteStoredScore() {
     document.getElementById("global_score").innerHTML =
         "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
 
-    document.getElementById("history").innerHTML = "<tr id=\"table_headers\"><th>Player</th><th>Bot</th><th>Result</th></tr>";
+    document.getElementById("history").innerHTML =
+        '<tr id="table_headers"><th>Player</th><th>Bot</th><th>Result</th></tr>';
     localStorage.removeItem("history");
     history = null;
     document.getElementById("results").innerHTML =
