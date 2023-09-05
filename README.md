@@ -2,7 +2,7 @@
 Welcome to the Shifumi (Rock-Paper-Scissors) game repository! You can play this classic game against a bot and keep track of your game history. Have fun!
 
 ## Play Now! 🎮
-You can play Shifumi right now by visiting our website: [Shifumi Game](juliensailly.github.io/shifumi)
+You can play Shifumi right now by visiting our website: [Shifumi Game](https://juliensailly.github.io/shifumi)
 
 ## Features 🌟
 - Play Rock-Paper-Scissors against a bot.
@@ -26,7 +26,7 @@ We welcome contributions to make Shifumi even better! Feel free to open issues, 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## About the Developer 👨‍💻
-This project is developed and maintained by Julien Sailly. You can find more about me on my [GitHub profile](github.com/juliensailly).
+This project is developed and maintained by Julien Sailly. You can find more about me on my [GitHub profile](https://www.github.com/juliensailly).
 
 ## Acknowledgments 🙌
 Special thanks to the open-source community for their invaluable contributions and inspiration!
