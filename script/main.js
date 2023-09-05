@@ -25,17 +25,36 @@ function retrieveHistory() {
     if (history != null) {
         var historyList = document.getElementById("history");
         for (var i = 0; i < history.length; i++) {
-            var newHistory = document.createElement("li");
-            newHistory.textContent =
-                "Player : " + history[i].player + " Bot : " + history[i].bot;
+            var result = null;
             if (history[i].result == "player") {
-                newHistory.style.backgroundColor = "green";
+                result = "✅";
             } else if (history[i].result == "bot") {
-                newHistory.style.backgroundColor = "red";
+                result = "❌";
             } else {
-                newHistory.style.backgroundColor = "grey";
+                result = "⚫";
             }
+            var newHistory = document.createElement("tr");
+            newHistory.innerHTML =
+                "<tr><td>" +
+                history[i].player +
+                "</td><td>" +
+                result +
+                "</td><td>" +
+                history[i].bot +
+                "</td></tr>";
+            // if (history[i].result == "player") {
+            //     newHistory.style.backgroundColor = "green";
+            // } else if (history[i].result == "bot") {
+            //     newHistory.style.backgroundColor = "red";
+            // } else {
+            //     newHistory.style.backgroundColor = "grey";
+            // }
+            // Insert the new history after the first element of the list
             historyList.insertBefore(newHistory, historyList.firstChild);
+            historyList.insertBefore(
+                document.getElementById("table_headers"),
+                historyList.firstChild
+            );
         }
     }
 }
@@ -138,7 +157,7 @@ function deleteStoredScore() {
     document.getElementById("global_score").innerHTML =
         "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
 
-    document.getElementById("history").innerHTML = "";
+    document.getElementById("history").innerHTML = "<tr id=\"table_headers\"><th>Player</th><th>Bot</th><th>Result</th></tr>";
     localStorage.removeItem("history");
     history = null;
     document.getElementById("results").innerHTML =
@@ -155,15 +174,33 @@ function addToHistory(playerChoice, botChoice, result) {
     history.push({ player: playerChoice, bot: botChoice, result: result });
     localStorage.setItem("history", JSON.stringify(history));
 
-    var history = document.getElementById("history");
-    var newHistory = document.createElement("li");
-    newHistory.textContent = "Player : " + playerChoice + " Bot : " + botChoice;
+    var resultEmoji = null;
     if (result == "player") {
-        newHistory.style.backgroundColor = "green";
+        resultEmoji = "✅";
     } else if (result == "bot") {
-        newHistory.style.backgroundColor = "red";
+        resultEmoji = "❌";
     } else {
-        newHistory.style.backgroundColor = "grey";
+        resultEmoji = "⚫";
     }
+
+    var history = document.getElementById("history");
+    var newHistory = document.createElement("tr");
+    newHistory.innerHTML =
+        "<tr><td>" +
+        playerChoice +
+        "</td><td>" +
+        resultEmoji +
+        "</td><td>" +
+        botChoice +
+        "</td></tr>";
+    // if (result == "player") {
+    //     newHistory.style.backgroundColor = "green";
+    // } else if (result == "bot") {
+    //     newHistory.style.backgroundColor = "red";
+    // } else {
+    //     newHistory.style.backgroundColor = "grey";
+    // }
     history.insertBefore(newHistory, history.firstChild);
+    var tableHeaders = document.getElementById("table_headers");
+    history.insertBefore(tableHeaders, history.firstChild);
 }

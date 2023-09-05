@@ -22,7 +22,7 @@ body {
     font-weight: normal;
     height: 100vh;
     margin: auto;
-    max-width: 800px;
+    max-width: 700px;
     overflow-y: auto;
     scrollbar-color: auto;
     scroll-behavior: smooth;
@@ -146,12 +146,11 @@ div.history h2 {
     text-align: center;
 }
 
-ul#history {
-    list-style-type: none;
+table#history {
     padding: 0;
     margin-top: 1rem;
 }
 
-ul#history li {
+table#history tr {
     padding: 0.5rem;
 }
