@@ -1,6 +1,8 @@
 var botScore = 0,
     playerScore = 0;
 retrieveScore();
+var history = null;
+retrieveHistory();
 
 // Function to retrieve the score from local storage when starting the game
 function retrieveScore() {
@@ -12,6 +14,30 @@ function retrieveScore() {
     }
     document.getElementById("global_score").innerHTML =
         "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
+}
+
+// Function to retrieve the history from local storage when starting the game
+function retrieveHistory() {
+    var history = null;
+    if (localStorage.getItem("history") != null) {
+        history = JSON.parse(localStorage.getItem("history"));
+    }
+    if (history != null) {
+        var historyList = document.getElementById("history");
+        for (var i = 0; i < history.length; i++) {
+            var newHistory = document.createElement("li");
+            newHistory.textContent =
+                "Player : " + history[i].player + " Bot : " + history[i].bot;
+            if (history[i].result == "player") {
+                newHistory.style.backgroundColor = "green";
+            } else if (history[i].result == "bot") {
+                newHistory.style.backgroundColor = "red";
+            } else {
+                newHistory.style.backgroundColor = "grey";
+            }
+            historyList.appendChild(newHistory);
+        }
+    }
 }
 
 // When the player clicks
@@ -111,11 +137,24 @@ function deleteStoredScore() {
     botScore = 0;
     document.getElementById("global_score").innerHTML =
         "<p>Player : " + playerScore + "</p> <p>Bot : " + botScore + "</p>";
+
     document.getElementById("history").innerHTML = "";
+    localStorage.removeItem("history");
+    history = null;
+    document.getElementById("results").innerHTML =
+        "<p>Player : </p><p>Bot : </p><p>Result : </p>";
 }
 
 // Function to add the result of the game to the history
 function addToHistory(playerChoice, botChoice, result) {
+    if (localStorage.getItem("history") != null) {
+        history = JSON.parse(localStorage.getItem("history"));
+    } else {
+        history = [];
+    }
+    history.push({ player: playerChoice, bot: botChoice, result: result });
+    localStorage.setItem("history", JSON.stringify(history));
+
     var history = document.getElementById("history");
     var newHistory = document.createElement("li");
     newHistory.textContent = "Player : " + playerChoice + " Bot : " + botChoice;
